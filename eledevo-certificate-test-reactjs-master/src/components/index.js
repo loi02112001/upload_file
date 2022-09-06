@@ -7,7 +7,7 @@ export default class Index extends React.Component {
         id: '',
         nameUpdate: '',
         nameSearch: '',
-
+        checkSearch:''
     }
     handleReview(file) {
         this.setState({ fileImg: file })
@@ -23,31 +23,11 @@ export default class Index extends React.Component {
         let searchDropDown = []
         let arr = []
 
-
-
-       
-        // console.log(typeof itemSearch2, 'day la iteamsearc2h');
-        // if (this.props.searchItem2) {
-        //     itemSearch2 => {
-        //         return (
-        //             <tr >
-        //                 <td style={{ width: '350px' }}>{itemSearch2.name}</td>
-        //                 <td>{itemSearch2.img.map((value, key) => {
-        //                     return (
-        //                         <div >
-        //                             <img alt="error" src={value} width={50} height={50}></img>
-        //                         </div>
-        //                     )
-        //                 })}
-        //                 </td>
-        //             </tr>
-        //         )
-        //     }
-        // }
         if (this.props.itemSearch) {
             searchDropDown = this.props.itemSearch.map((item, key) => {
                 return (
-                    <tr key={item._id} onClick={() => { this.props.searchItem2({ id: item._id }) }}>
+                    <tr key={item._id} onClick={() => { this.props.searchItem2({ id: item._id })
+                    this.setState({checkSearch:true}) }}>
                         <td style={{ width: '350px' }}>{item.name}</td>
                         <td>{item.img.map((value, key) => {
                             return (
@@ -163,12 +143,10 @@ export default class Index extends React.Component {
                             <th>Ten</th>
                             <th>Anh</th>
                         </tr>
-                        {this.props.itemSearch2 ? arr : listData}
-                        {/* {listData} */}
+                        {this.state.checkSearch === true ? arr : listData}
+                        <button onClick={()=>{this.setState({checkSearch:''})}} style={{visibility:this.state.checkSearch === true ? 'visible':'hidden'}}>Back</button>
                     </tbody>
                 </table>
-
-
             </div>
         )
     }
